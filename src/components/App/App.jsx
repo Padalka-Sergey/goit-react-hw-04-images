@@ -1,24 +1,15 @@
-import React, { Component } from 'react';
+import { useState } from 'react';
 import { AppContainer } from './App.styled';
 import { SearchbarForm } from 'components/Searchbar/Searchbar';
 import { ImageGallery } from 'components/ImageGallery/ImageGallery';
 
-export class App extends Component {
-  state = {
-    textForm: '',
-  };
+export function App() {
+  const [textForm, setTextForm] = useState('');
 
-  handleFormSubmit = textForm => {
-    this.setState({ textForm });
-  };
-
-  render() {
-    const { textForm } = this.state;
-    return (
-      <AppContainer>
-        <SearchbarForm onSubmitProps={this.handleFormSubmit} />
-        <ImageGallery textForm={textForm} />
-      </AppContainer>
-    );
-  }
+  return (
+    <AppContainer>
+      <SearchbarForm onSubmitProps={text => setTextForm(text)} />
+      <ImageGallery textForm={textForm} />
+    </AppContainer>
+  );
 }
